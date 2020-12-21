@@ -3,7 +3,7 @@
 ## Advent of Code
 Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. People use them as a speed contest, interview prep, company training, university coursework, practice problems, or to challenge each other.
 
-Learn more on [Advent of Code](https://adventofcode.com/), it's fun.
+Learn more in [Advent of Code](https://adventofcode.com/), it's fun (it's how swe counting down till Christmas).
 
 ## About
 This github repo contains my solution for Advent of Code 2020 problems written in Python (will try to solve these problems in other languages (if have time)).

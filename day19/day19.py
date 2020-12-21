@@ -1,3 +1,14 @@
+f = open("./data.txt")
+
+data = []
+ans1 = 0
+ans2 = 0
+
+data, message = f.read().split('\n\n')
+data = data.splitlines()
+message = message.splitlines()
+
+
 def rule_maker(raw_rules):
     rules = {}
     for rule in raw_rules:
@@ -11,6 +22,9 @@ def rule_maker(raw_rules):
                 temp_v.append([int(vv) for vv in v.split(' ')])
             rules[int(key)] = temp_v
     return rules
+
+
+rules = rule_maker(data)
 
 
 def match_rule(expr, stack):
@@ -38,14 +52,10 @@ def count_messages(rules, messages):
     return total
 
 
-with open("data.txt") as fp:
-    raw_rules, message = fp.read().split('\n\n')
-    raw_rules = raw_rules.splitlines()
-    message = message.splitlines()
-
-rules = rule_maker(raw_rules)
-
-print(f"Part 1: {count_messages(rules, message)}")
+ans1 = count_messages(rules, message)
 rules[8] = [[42], [42, 8]]
 rules[11] = [[42, 31], [42, 11, 31]]
-print(f"Part 2: {count_messages(rules, message)}")
+ans2 = count_messages(rules, message)
+
+print(ans1)
+print(ans2)

@@ -7,7 +7,7 @@ you like. People use them as a speed contest, interview prep, company training,
 university coursework, practice problems, or to challenge each other.
 
 Learn more about Advent of Code in this [link](https://adventofcode.com/), it's 
-fun (it's how swe counting down till Christmas).
+fun.
 
 ## About
 This github repo contains my solution for Advent of Code 2020 problems written in 

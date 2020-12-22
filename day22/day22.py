@@ -4,6 +4,9 @@ f = open("./data.txt")
 lines = f.readlines()
 
 data = {}
+games = {}
+
+games[1] = []
 
 p = 0
 for line in lines:
@@ -32,9 +35,6 @@ def part1(decks):
             for i in range(len(v)):
                 result += (len(v) - i) * v[i]
     return result
-
-
-games = {}
 
 
 # check for duplicate decks
@@ -88,57 +88,60 @@ def subgame(decks, game):
 
 
 # part 2
-game_winner = 0
-result = 0
+def part2(decks):
+    game_winner = 0
+    result = 0
+    while len(decks[1]) > 0 and len(decks[2]) > 0:
+        if not check_decks(decks, 1):
+            global games
+            d1 = copy.deepcopy(decks[1])
+            d2 = copy.deepcopy(decks[2])
+            games[1].append([d1, d2])
+            print("Player 1 decks: ", decks[1])
+            print("Player 2 decks: ", decks[2])
+            p1 = decks[1].pop(0)
+            p2 = decks[2].pop(0)
+            print("Player 1 plays: ", p1)
+            print("Player 2 plays: ", p2)
 
-games[1] = []
-while len(data2[1]) > 0 and len(data2[2]) > 0:
-    if not check_decks(data2, 1):
-        d1 = copy.deepcopy(data2[1])
-        d2 = copy.deepcopy(data2[2])
-        games[1].append([d1, d2])
-        print("Player 1 decks: ", data2[1])
-        print("Player 2 decks: ", data2[2])
-        p1 = data2[1].pop(0)
-        p2 = data2[2].pop(0)
-        print("Player 1 plays: ", p1)
-        print("Player 2 plays: ", p2)
+            # enter subgame
+            if len(decks[1]) >= p1 and len(decks[2]) >= p2:
+                print("Playing sub-game...\n")
+                s1 = copy.deepcopy(decks[1][:p1])
+                s2 = copy.deepcopy(decks[2][:p2])
+                winner = subgame({1: s1, 2: s2}, max(list(games.keys()))+1)
+                if winner == 1:
+                    print("Player 1 wins sub-game\n")
+                    decks[1].extend([p1, p2])
+                else:
+                    print("Player 2 wins sub-game\n")
+                    decks[2].extend([p2, p1])
 
-        # enter subgame
-        if len(data2[1]) >= p1 and len(data2[2]) >= p2:
-            print("Playing sub-game...\n")
-            s1 = copy.deepcopy(data2[1][:p1])
-            s2 = copy.deepcopy(data2[2][:p2])
-            winner = subgame({1: s1, 2: s2}, max(list(games.keys()))+1)
-            if winner == 1:
-                print("Player 1 wins sub-game\n")
-                data2[1].extend([p1, p2])
+            # normal game
+            elif p1 > p2:
+                print("Player 1 wins\n")
+                decks[1].extend([p1, p2])
+
             else:
-                print("Player 2 wins sub-game\n")
-                data2[2].extend([p2, p1])
-
-        # normal game
-        elif p1 > p2:
-            print("Player 1 wins\n")
-            data2[1].extend([p1, p2])
+                print("Player 2 wins\n")
+                decks[2].extend([p2, p1])
 
         else:
-            print("Player 2 wins\n")
-            data2[2].extend([p2, p1])
+            game_winner = 1
+            break
+
+    if game_winner == 0:
+        for k, v in decks.items():
+            if len(v) > 0:
+                for i in range(len(v)):
+                    result += (len(v) - i) * v[i]
 
     else:
-        game_winner = 1
-        break
+        for i in range(len(decks[game_winner])):
+            result += (len(decks[game_winner]) - i) * decks[game_winner][i]
 
-if game_winner == 0:
-    for k, v in data2.items():
-        if len(v) > 0:
-            for i in range(len(v)):
-                result += (len(v) - i) * v[i]
+    return result
 
-else:
-    for i in range(len(data2[game_winner])):
-        result += (len(data2[game_winner]) - i) * data2[game_winner][i]
 
 print(part1(data))
-print(result)
+print(part2(data2))

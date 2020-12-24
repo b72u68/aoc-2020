@@ -38,5 +38,5 @@ Day 20 | :heavy_check_mark: | :x:
 Day 21 | :heavy_check_mark: | :heavy_check_mark:
 Day 22 | :heavy_check_mark: | :heavy_check_mark:
 Day 23 | :heavy_check_mark: | :heavy_check_mark:
-Day 24 | :x: | :x:
+Day 24 | :heavy_check_mark: | :heavy_check_mark:
 Day 25 | :x: | :x:
